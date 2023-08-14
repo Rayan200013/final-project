@@ -14,10 +14,34 @@ const NavBar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+
+    const search = document.getElementById("search");
+    const button = document.getElementById("button");
+    const input = document.getElementById("input");
+
+    function loading() {
+      search.classList.add("loading");
+
+      setTimeout(function () {
+        search.classList.remove("loading");
+      }, 1500);
+    }
+
+    button.addEventListener("click", loading);
+
+    input.addEventListener("keydown", function (event) {
+      if (event.keyCode === 13) {
+        loading();
+      }
+    });
+
+    // Clean up the event listeners when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      button.removeEventListener("click", loading);
+      input.removeEventListener("keydown", loading);
     };
-  }, []);
+  }, []); // Empty dependency array ensures that this effect runs once on mount
 
   return (
     <>
@@ -55,7 +79,24 @@ const NavBar = () => {
         </nav>
       </div>
       <div class="home">
-        <h1 className="heading-one-slr">mayel ya ghzayel ya ghzayel mayel</h1>
+        <h1 className="heading-one-slr">
+          Your gateway to Adventours Journeys in CHOUF
+        </h1>
+        <p>
+          Inspire and guide users on where to go and what to do during their
+          travel in Chouf.
+        </p>
+
+        <div id="search">
+          <input id="input" placeholder="Search..." />
+          <button id="button">
+            <i class="fa fa-search"></i>
+          </button>
+          <div class="spinner">
+            <i class="fa fa-spinner"></i>
+          </div>
+        </div>
+        {/* <div class="note">Click the button or hit enter.</div> */}
       </div>
       <p class="myP">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione

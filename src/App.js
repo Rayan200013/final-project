@@ -4,20 +4,30 @@ import NavBar from "./components/Navbar";
 import Home from "./components/Home"; // Import your home component
 import About from "./components/About"; // Import your about component
 import Contact from "./components/Contact"; // Import your contact component
-
 import "./App.css";
+import Item from "./MyItem";
 
 function App() {
   return (
-    <Router>
+    <>
+      <Router>
+        <div>
+          <NavBar>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+          </NavBar>
+        </div>
+      </Router>
+
+      {/* component one */}
       <div>
-        <NavBar>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-        </NavBar>
+        {/* Add a route for the item */}
+        <Item name="Gully" />
+        <Item name="Lucy" />
+        <Item name="Rayan" />
       </div>
-    </Router>
+    </>
   );
 }
 
